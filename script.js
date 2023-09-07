@@ -74,12 +74,36 @@ function formatMoney(number) {
 }
 
 // function for double the money
+function double() {
+  data = data.map(user => ({ ...user, money: user.money * 2 }))
+  updateDOM()
+}
+doubleBtn.addEventListener("click", double)
 
 // function for showing only millionaires
+function onlyMils() {
+  data = data.filter(user => user.money >= 1_000_000)
+  updateDOM()
+}
+showMilliBtn.addEventListener('click', onlyMils)
 
 // function for sorting richest persons
+function sortByMoney() {
+  data = data.sort((a, b) => b.money - a.money)
+  updateDOM()
+}
+sort.addEventListener('click', sortByMoney)
 
 // function for calculating the total wealth of all persons
+function totalWealth() {
+  const sum = data.reduce((prevValue, currentValue) => prevValue + currentValue.money, 0)
+  data.push({
+    name: "Total wealth",
+    money: sum
+  })
+  updateDOM()
+}
+calcWealth.addEventListener('click', totalWealth)
 
 // add new user, event listener
 addUserBtn.addEventListener("click", getRandomUser);
